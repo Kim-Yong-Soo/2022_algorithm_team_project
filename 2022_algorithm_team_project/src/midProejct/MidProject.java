@@ -15,16 +15,18 @@ class SLP {
 		Random random = new Random();
 		int diceNum;
 
-		while (curPos + (diceNum = random.nextInt(6) + 1) < 100) {
+		while (true) {
+			diceNum = random.nextInt(6) + 1;
 			curPos += diceNum;
 			diceCnt++;
 			System.out.print(curPos - diceNum + "에서 " + "주사위 값이 " + diceNum + "이 나와 ");
-			if (snakes.containsKey(curPos)) {
+			if (snakes.containsKey(curPos))
 				curPos = snakes.get(curPos);
-			} else if (ladders.containsKey(curPos)) {
+			else if (ladders.containsKey(curPos))
 				curPos = ladders.get(curPos);
-			}
 			System.out.println(curPos + "(으)로 이동했습니다.");
+			if (curPos >= 100)
+				break;
 		}
 	}
 
@@ -49,7 +51,7 @@ public class MidProject {
 		int totalDiceCnt = 0, totalTryCnt = 0;
 		SLP slp;
 
-		while (totalTryCnt < 30) {
+		while (totalTryCnt < 1) {
 			totalTryCnt++;
 			slp = new SLP();
 			slp.process(snakes, ladders);
