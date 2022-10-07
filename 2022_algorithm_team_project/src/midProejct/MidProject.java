@@ -51,7 +51,7 @@ public class MidProject {
 		int totalDiceCnt = 0, totalTryCnt = 0;
 		SLP slp;
 
-		while (totalTryCnt < 1) {
+		while (totalTryCnt < 30) {
 			totalTryCnt++;
 			slp = new SLP();
 			slp.process(snakes, ladders);
