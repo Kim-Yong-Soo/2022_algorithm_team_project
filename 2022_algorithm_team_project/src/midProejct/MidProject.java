@@ -6,10 +6,12 @@ import java.util.Random;
 class SLP { // Snake and Ladder Problem
 	private int diceCnt, curPos, repeatNum; // diceCnt: 주사위를 던진 횟수, curPos: 현재 위치(좌표), repeatNum: 반복 횟수
 	private HashMap<Integer, Integer> snakes, ladders; // snakes: 뱀이 머리와 꼬리, ladders: 사다리의 위아래
+	private boolean isDone; // 처리되었는가?
 
 	// 초기값 설정 (repeatNum 지정 X)
 	public SLP(HashMap<Integer, Integer> snakes, HashMap<Integer, Integer> ladders) {
 		diceCnt = 0;
+		isDone = false;
 		repeatNum = 1;
 		this.snakes = snakes;
 		this.ladders = ladders;
@@ -18,14 +20,20 @@ class SLP { // Snake and Ladder Problem
 	// 초기값 설정 (repeatNum 지정 O)
 	public SLP(HashMap<Integer, Integer> snakes, HashMap<Integer, Integer> ladders, int repeatNum) {
 		diceCnt = 0;
+		isDone = false;
 		this.repeatNum = repeatNum;
 		this.snakes = snakes;
 		this.ladders = ladders;
 	}
 
 	public void process() { // 처리를 위해 불리는 함수
-		for (int i = 0; i < repeatNum; i++)
-			play();
+		if (isDone) // 처리됐을 경우 X
+			System.out.println("이미 처리됐습니다.");
+		else {
+			for (int i = 0; i < repeatNum; i++)
+				play();
+			isDone = true;
+		}
 	}
 
 	private void play() { // 실제 처리
@@ -47,6 +55,12 @@ class SLP { // Snake and Ladder Problem
 
 			System.out.println(curPos + "(으)로 이동했습니다.");
 		} while (curPos < 100); // 현재 위치가 100 이상인 경우 종료
+	}
+
+	public void resetAndProcess() { // 던진 횟수와 처리 여부를 초기화, 새롭게 process()
+		diceCnt = 0;
+		isDone = false;
+		process();
 	}
 
 	public double getAvgDiceCnt() {
@@ -75,6 +89,16 @@ public class MidProject {
 		SLP slp = new SLP(snakes, ladders, 30);
 		slp.process();
 		System.out.println(slp);
+//		slp.resetAndProcess();
+//		System.out.println(slp);
+//		slp.resetAndProcess();
+//		System.out.println(slp);
+//		slp.resetAndProcess();
+//		System.out.println(slp);
+//		slp.resetAndProcess();
+//		System.out.println(slp);
+//		slp.resetAndProcess();
+//		System.out.println(slp);
 	}
 
 }
